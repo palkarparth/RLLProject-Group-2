@@ -1,0 +1,135 @@
+mysql> use uniconcompany;
+Database changed
+mysql> show tables;
++-------------------------+
+| Tables_in_uniconcompany |
++-------------------------+
+| complaints_table        |
+| customer_table          |
+| engineer_duty           |
+| engineer_table          |
+| feedbacks_table         |
+| manager_table           |
++-------------------------+
+6 rows in set (0.05 sec)
+
+mysql> desc customer_table;
++-------------------+--------------+------+-----+---------+-------+
+| Field             | Type         | Null | Key | Default | Extra |
++-------------------+--------------+------+-----+---------+-------+
+| customer_email    | varchar(255) | NO   | PRI | NULL    |       |
+| customer_address  | varchar(255) | YES  |     | NULL    |       |
+| customer_mobile   | varchar(255) | YES  | UNI | NULL    |       |
+| customer_name     | varchar(255) | YES  |     | NULL    |       |
+| customer_password | varchar(255) | YES  |     | NULL    |       |
+| customer_pincode  | varchar(255) | YES  |     | NULL    |       |
++-------------------+--------------+------+-----+---------+-------+
+6 rows in set (0.04 sec)
+
+mysql> desc complaints_table;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| ticket_id      | int          | NO   | PRI | NULL    | auto_increment |
+| complaint      | varchar(255) | YES  |     | NULL    |                |
+| customer_email | varchar(255) | YES  |     | NULL    |                |
+| pincode        | varchar(255) | YES  |     | NULL    |                |
+| status         | varchar(255) | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> desc engineer_table;
++-------------------+--------------+------+-----+---------+-------+
+| Field             | Type         | Null | Key | Default | Extra |
++-------------------+--------------+------+-----+---------+-------+
+| engineer_email    | varchar(255) | NO   | PRI | NULL    |       |
+| engineer_name     | varchar(255) | YES  |     | NULL    |       |
+| engineer_password | varchar(255) | YES  |     | NULL    |       |
++-------------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc engineer_duty;
++------------------+--------------+------+-----+---------+----------------+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| engineer_duty_id | int          | NO   | PRI | NULL    | auto_increment |
+| customer_email   | varchar(255) | YES  |     | NULL    |                |
+| engineer_email   | varchar(255) | YES  |     | NULL    |                |
+| ticket_id        | int          | NO   |     | NULL    |                |
++------------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> desc feedbacks_table;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| feedback_id    | int          | NO   | PRI | NULL    | auto_increment |
+| customer_email | varchar(255) | YES  |     | NULL    |                |
+| feedback       | varchar(255) | YES  |     | NULL    |                |
+| ticket_id      | int          | NO   |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> desc manager_table;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| manager_email    | varchar(255) | NO   | PRI | NULL    |       |
+| manager_name     | varchar(255) | YES  |     | NULL    |       |
+| manager_password | varchar(255) | YES  |     | NULL    |       |
+| manager_pincode  | varchar(255) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from manager_table;
++-----------------------+------------------+------------------+-----------------+
+| manager_email         | manager_name     | manager_password | manager_pincode |
++-----------------------+------------------+------------------+-----------------+
+| abhiram@gmail.com     | Abhiram Malhotra | Abhiram@         | 442401          |
+| palkarparth@gmail.com | Parth Palkar     | Parth@123        | 442401          |
+| punit@gmail.com       | Punit Sen        | Punit@1989       | 548796          |
+| rajesh@gmail.com      | Rajesh Meka      | Rajesh@345       | 254320          |
+| samir@gmail.com       | Samir Bali       | Samir@689        | 442401          |
++-----------------------+------------------+------------------+-----------------+
+5 rows in set (0.03 sec)
+
+mysql> select * from customer_table;
++-------------------+------------------+-----------------+----------------+-------------------+------------------+
+| customer_email    | customer_address | customer_mobile | customer_name  | customer_password | customer_pincode |
++-------------------+------------------+-----------------+----------------+-------------------+------------------+
+| indrani@gmail.com | Mumbai           | 7733665522      | Indrani Hayre  | Indrani@552       | 452103           |
+| kashika@gmail.com | Pune             | 7030768225      | Kashika Garde  | Kashika@123       | 444111           |
+| mitra@gmail.com   | Bhopal           | 9875632014      | Mitra Banerjee | Mitra@330         | 542103           |
+| upasana@gmail.com | Nagpur           | 9423117205      | Upasana Bobal  | Bobal@998         | 441001           |
+| vishal@gmail.com  | Delhi            | 8756321039      | Vishal Bansal  | Bansal@895        | 254320           |
++-------------------+------------------+-----------------+----------------+-------------------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from engineer_table;
++-----------------------+-----------------------+-------------------+
+| engineer_email        | engineer_name         | engineer_password |
++-----------------------+-----------------------+-------------------+
+| chandra@gmail.com     | Chandra Apte          | Apte@222          |
+| chandrakant@gmail.com | Chandrakant Narayanan | King@47           |
+| malini@gmail.com      | Malini Swamy          | Swamy@098         |
+| narendra@gmail.com    | Narendra Seth         | Seth@333          |
+| viaan24@gmail.com     | Viaan Contractor      | Viaan2365@        |
++-----------------------+-----------------------+-------------------+
+5 rows in set (0.08 sec)
+
+mysql> select * from complaints_table;
++-----------+----------------------------------------+-------------------+---------+--------+
+| ticket_id | complaint                              | customer_email    | pincode | status |
++-----------+----------------------------------------+-------------------+---------+--------+
+|         1 | Network Issues                         | indrani@gmail.com | 452103  | raised |
+|         2 | Recharge successful but not activated. | kashika@gmail.com | 444111  | Solved |
++-----------+----------------------------------------+-------------------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from feedbacks_table;
++-------------+-------------------+-----------------------+-----------+
+| feedback_id | customer_email    | feedback              | ticket_id |
++-------------+-------------------+-----------------------+-----------+
+|           1 | indrani@gmail.com | Great work by company |         1 |
++-------------+-------------------+-----------------------+-----------+
+1 row in set (0.00 sec)
